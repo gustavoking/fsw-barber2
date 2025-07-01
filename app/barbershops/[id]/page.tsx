@@ -23,6 +23,9 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
     where: {
       id: params.id,
     },
+    include: {
+      services: true,
+    },
   })
   if (!barbershop) {
     return notFound()
