@@ -22,6 +22,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       services: true,
     },
   })
+
   if (!barbershop) {
     return notFound()
   }
