@@ -26,7 +26,7 @@ const SidebarSheet = () => {
   return (
     <SheetContent className="overflow-y-auto">
       <SheetHeader>
-        <SheetTitle className="pl-5 text-left">Menu</SheetTitle>
+        <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
 
       <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
@@ -106,17 +106,18 @@ const SidebarSheet = () => {
           </Button>
         ))}
       </div>
-
-      <div className="flex flex-col gap-2 py-5">
-        <Button
-          onClick={handleLogoutClick}
-          variant="ghost"
-          className="justify-start gap-2"
-        >
-          <LogOutIcon size={18} />
-          Sair da conta
-        </Button>
-      </div>
+      {data?.user && (
+        <div className="flex flex-col gap-2 py-5">
+          <Button
+            onClick={handleLogoutClick}
+            variant="ghost"
+            className="justify-start gap-2"
+          >
+            <LogOutIcon size={18} />
+            Sair da conta
+          </Button>
+        </div>
+      )}
     </SheetContent>
   )
 }
