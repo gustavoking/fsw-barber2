@@ -15,9 +15,10 @@ import {
 import { Calendar } from "./ui/calendar"
 import { ptBR } from "date-fns/locale"
 import { useState } from "react"
-import { format } from "date-fns"
+import { format, set } from "date-fns"
 import { createBooking } from "../barbershops/_actions/create-booking"
 import { useSession } from "next-auth/react"
+import { toast } from "sonner"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -64,11 +65,25 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   }
 
   const handleCreateBooking = async () => {
-    await createBooking({
-      serviceId: service.id,
-      userId: data?.user,
-      date: selectedTime,
+    if (!selectedDay || !selectedTime) return
+
+    const hour = Number(selectedTime.split(":")[0])
+    const minute = Number(selectedTime.split(":")[1])
+    const newDate = set(selectedDay, {
+      minutes: minute,
+      hours: hour,
     })
+    try {
+      await createBooking({
+        serviceId: service.id,
+        userId: (data?.user as any).id,
+        date: newDate,
+      })
+      toast.success("Agendamento feito")
+    } catch (error) {
+      console.error(error)
+      toast.error("erro ao criar reserva")
+    }
   }
 
   return (
@@ -181,9 +196,15 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     </Card>
                   </div>
                 )}
-                <SheetFooter className="px-5">
+                <SheetFooter className="mt-5 px-5">
                   <SheetClose asChild>
-                    <Button type="submit">Confirmar</Button>
+                    <Button
+                      onClick={handleCreateBooking}
+                      type="submit"
+                      disabled={!selectedDay || !selectedTime}
+                    >
+                      Confirmar
+                    </Button>
                   </SheetClose>
                 </SheetFooter>
               </SheetContent>
