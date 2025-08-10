@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet"
 import Image from "next/image"
+import PhoneItem from "./phone-item"
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -92,6 +93,50 @@ const BookingItem = ({ booking }: BookingItemProps) => {
               </div>
             </CardContent>
           </Card>
+        </div>
+        <div className="mx-5 mt-6">
+          <Badge
+            className="w-fit"
+            variant={isConfirmed ? "default" : "secondary"}
+          >
+            {isConfirmed ? "Confirmado" : "Finalizado"}
+          </Badge>
+        </div>
+        <Card className="mx-5">
+          <CardContent className="space-y-3 p-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm">{booking.service.name}</h2>
+              <p className="text-sm font-bold">
+                {Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(Number(booking.service.price))}
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm text-gray-400">Data</h2>
+              <p className="text-sm">
+                {format(booking.date, "d 'de' MMMM", {
+                  locale: ptBR,
+                })}
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm text-gray-400">Horário</h2>
+              <p className="text-sm">
+                {format(booking.date, "HH:mm", { locale: ptBR })}
+              </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm text-gray-400">Barbearia</h2>
+              <p className="text-sm">{barbershop.name}</p>
+            </div>
+          </CardContent>
+        </Card>
+        <div className="mx-5 space-y-3">
+          {barbershop.phones.map((phone, index) => (
+            <PhoneItem key={index} phone={phone} />
+          ))}
         </div>
       </SheetContent>
     </Sheet>
