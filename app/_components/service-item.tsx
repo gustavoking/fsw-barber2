@@ -52,11 +52,6 @@ const TIME_LIST = [
   "18:00",
 ]
 
-interface GetTimeListProps {
-  bookings: Booking[]
-  selectedDay: Date
-}
-
 const getTimeList = (bookings: Booking[]) => {
   return TIME_LIST.filter((time) => {
     const hour = Number(time.split(":")[0])
