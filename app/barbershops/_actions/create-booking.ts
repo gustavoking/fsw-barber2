@@ -1,5 +1,6 @@
 "use server"
 
+import { authOptions } from "@/app/_lib/auth"
 import { db } from "@/app/_lib/prisma"
 import { getServerSession } from "next-auth"
 import { revalidatePath } from "next/cache"
@@ -10,7 +11,7 @@ interface CreateBookingParams {
 }
 
 export const createBooking = async (params: CreateBookingParams) => {
-  const user = await getServerSession()
+  const user = await getServerSession(authOptions)
 
   if (!user) {
     throw new Error("Usuario nao autenticado")
@@ -19,4 +20,5 @@ export const createBooking = async (params: CreateBookingParams) => {
     data: { ...params, userId: (user.user as any).id },
   })
   revalidatePath("/barbershops/[id]")
+  revalidatePath("/bookings")
 }
