@@ -339,7 +339,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     </div>
                   )}
 
-                  <SheetFooter className="mt-5 px-5">
+                  <SheetFooter className="sticky bottom-0 z-10">
                     <SheetClose asChild>
                       <Button
                         onClick={handleCreateBooking}
