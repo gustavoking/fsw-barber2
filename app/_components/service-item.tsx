@@ -1,4 +1,5 @@
 "use client"
+
 import { Barbershop, BarbershopService, Booking } from "@prisma/client"
 import Image from "next/image"
 import { Button } from "./ui/button"
@@ -10,7 +11,6 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "./ui/sheet"
 import { Calendar } from "./ui/calendar"
 import { ptBR } from "date-fns/locale"
@@ -22,6 +22,14 @@ import { toast } from "sonner"
 import { getBookings } from "../barbershops/_actions/get-booking"
 import { Dialog, DialogContent } from "./ui/dialog"
 import SignInDialog from "./sign-in-dialog"
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel" // ajuste conforme seu projeto
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -145,7 +153,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       toast.success("Agendamento feito")
     } catch (error) {
       console.error(error)
-      toast.error("erro ao criar reserva")
+      toast.error("Erro ao criar reserva")
     }
   }
 
@@ -156,6 +164,24 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
       selectedDay,
     })
   }, [dayBookings, selectedDay])
+
+  // Hook interno para detectar desktop
+  function useIsDesktop(breakpoint = 768) {
+    const [isDesktop, setIsDesktop] = useState(false)
+
+    useEffect(() => {
+      function handleResize() {
+        setIsDesktop(window.innerWidth >= breakpoint)
+      }
+      handleResize()
+      window.addEventListener("resize", handleResize)
+      return () => window.removeEventListener("resize", handleResize)
+    }, [breakpoint])
+
+    return isDesktop
+  }
+
+  const isDesktop = useIsDesktop()
 
   return (
     <>
@@ -169,7 +195,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
               className="rounded-lg object-cover"
             />
           </div>
-          <div className="space-y-3">
+          <div className="flex-1 space-y-3">
             <h3 className="font-semibold">{service.name}</h3>
             <p className="text-sm text-gray-400">{service.description}</p>
             <div className="flex items-center justify-between">
@@ -197,7 +223,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col items-center px-5">
-                    <div className="border-b border-solid">
+                    <div className="w-full border-b border-solid">
                       <Calendar
                         className="[&_.rdp-day]:mx-[1px] [&_.rdp-day]:h-10 [&_.rdp-day]:w-9 [&_.rdp-day]:text-sm"
                         mode="single"
@@ -231,21 +257,46 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                       />
                     </div>
                   </div>
+
                   {selectedDay && (
-                    <div className="flex gap-3 overflow-x-auto border-b border-solid p-5 [&::-webkit-scrollbar]:hidden">
+                    <div className="border-b border-solid p-5">
                       {timeList.length > 0 ? (
-                        timeList.map((time) => (
-                          <Button
-                            key={time}
-                            variant={
-                              selectedTime === time ? "default" : "outline"
-                            }
-                            className="rounded-full"
-                            onClick={() => handleTimeSelect(time)}
-                          >
-                            {time}
-                          </Button>
-                        ))
+                        isDesktop ? (
+                          <Carousel className="w-full max-w-md">
+                            <CarouselContent>
+                              {timeList.map((time) => (
+                                <CarouselItem key={time} className="basis-1/3">
+                                  <Button
+                                    variant={
+                                      selectedTime === time
+                                        ? "default"
+                                        : "outline"
+                                    }
+                                    className="w-full rounded-full"
+                                    onClick={() => handleTimeSelect(time)}
+                                  >
+                                    {time}
+                                  </Button>
+                                </CarouselItem>
+                              ))}
+                            </CarouselContent>
+                          </Carousel>
+                        ) : (
+                          <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                            {timeList.map((time) => (
+                              <Button
+                                key={time}
+                                variant={
+                                  selectedTime === time ? "default" : "outline"
+                                }
+                                className="rounded-full"
+                                onClick={() => handleTimeSelect(time)}
+                              >
+                                {time}
+                              </Button>
+                            ))}
+                          </div>
+                        )
                       ) : (
                         <p className="text-xs">
                           Não há horários disponíveis para este dia.
@@ -287,6 +338,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                       </Card>
                     </div>
                   )}
+
                   <SheetFooter className="mt-5 px-5">
                     <SheetClose asChild>
                       <Button
