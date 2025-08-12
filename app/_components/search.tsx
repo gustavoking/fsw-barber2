@@ -1,6 +1,6 @@
 "use client"
 
-import { SearchIcon } from "lucide-react"
+import { SearchIcon, XIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { useState } from "react"
@@ -48,6 +48,13 @@ const Search = () => {
         />
         <Button type="submit">
           <SearchIcon />
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => router.push("/")}
+          className="mb-4"
+        >
+          <XIcon />
         </Button>
       </form>
     </Form>
