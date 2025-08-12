@@ -222,7 +222,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                       Fazer Reserva
                     </SheetTitle>
                   </SheetHeader>
-                  <div className="flex flex-col items-center px-5">
+                  <div className="-ml-5 flex flex-col items-center px-5 md:ml-5">
                     <div className="w-full border-b border-solid">
                       <Calendar
                         className="[&_.rdp-day]:mx-[1px] [&_.rdp-day]:h-10 [&_.rdp-day]:w-9 [&_.rdp-day]:text-sm"
