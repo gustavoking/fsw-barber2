@@ -1,10 +1,10 @@
 import { format } from "date-fns"
 import { Card, CardContent } from "./ui/card"
-import { Barbershop, BarbershopService } from "@prisma/client"
+import { Barbershop, barbershopService } from "@prisma/client"
 import { ptBR } from "date-fns/locale"
 
 interface BookingSummaryProps {
-  service: Pick<BarbershopService, "name" | "price">
+  service: Pick<barbershopService, "name" | "price">
   barbershop: Pick<Barbershop, "name">
   selectedDate: Date
 }

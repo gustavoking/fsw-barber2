@@ -1,6 +1,6 @@
 "use client"
 
-import { Barbershop, BarbershopService, Booking } from "@prisma/client"
+import { Barbershop, barbershopService, Booking } from "@prisma/client"
 import Image from "next/image"
 import { Button } from "./ui/button"
 import { Card, CardContent } from "./ui/card"
@@ -32,7 +32,7 @@ import {
 } from "./ui/carousel" // ajuste conforme seu projeto
 
 interface ServiceItemProps {
-  service: BarbershopService
+  service: barbershopService
   barbershop: Pick<Barbershop, "name">
 }
 
