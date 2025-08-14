@@ -59,7 +59,7 @@ const Home = async () => {
           <Search />
         </div>
 
-        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+        <div className="mb-5 mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
             <Button
               className="gap-2"
@@ -79,7 +79,9 @@ const Home = async () => {
             </Button>
           ))}
         </div>
-
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Meus Agendamentos
+        </h2>
         <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {bookings.map((booking) => (
             <BookingItem key={booking.id} booking={booking} />

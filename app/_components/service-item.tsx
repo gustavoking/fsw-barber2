@@ -210,13 +210,16 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                 >
                   Reservar
                 </Button>
-                <SheetContent className="flex-1 overflow-y-auto px-0">
+                <SheetContent
+                  side="right"
+                  className="!w-[85vw] flex-1 overflow-y-auto px-0"
+                >
                   <SheetHeader>
                     <SheetTitle className="flex justify-center py-5">
                       Fazer Reserva
                     </SheetTitle>
                   </SheetHeader>
-                  <div className="-ml-5 flex flex-col items-center px-5 md:ml-5">
+                  <div className="-ml-1 flex w-[100%] flex-col items-center px-5 md:ml-5">
                     <div className="w-full border-b border-solid">
                       <Calendar
                         className="[&_.rdp-day]:mx-[1px] [&_.rdp-day]:h-10 [&_.rdp-day]:w-9 [&_.rdp-day]:text-sm"
