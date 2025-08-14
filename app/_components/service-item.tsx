@@ -23,13 +23,7 @@ import { getBookings } from "../barbershops/_actions/get-booking"
 import { Dialog, DialogContent } from "./ui/dialog"
 import SignInDialog from "./sign-in-dialog"
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./ui/carousel" // ajuste conforme seu projeto
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel" // ajuste conforme seu projeto
 
 interface ServiceItemProps {
   service: barbershopService
@@ -216,7 +210,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                 >
                   Reservar
                 </Button>
-                <SheetContent className="px-0">
+                <SheetContent className="flex-1 overflow-y-auto px-0">
                   <SheetHeader>
                     <SheetTitle className="flex justify-center py-5">
                       Fazer Reserva

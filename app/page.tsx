@@ -4,13 +4,13 @@ import Image from "next/image"
 import { db } from "./_lib/prisma"
 import BarbershopItem from "./_components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
-import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import { getServerSession } from "next-auth"
 import { authOptions } from "./_lib/auth"
 import Link from "next/link"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import BookingItem from "./_components/booking-item"
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
@@ -80,11 +80,11 @@ const Home = async () => {
           ))}
         </div>
 
-        {/* <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {bookings.map((booking) => (
             <BookingItem key={booking.id} booking={booking} />
           ))}
-        </div> */}
+        </div>
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Recomendados
         </h2>
