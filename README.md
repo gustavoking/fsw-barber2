@@ -1,4 +1,92 @@
+<h1 align="center">
+  <img src=".github/Logo.png" alt="Logo">
+</h1>
+
+## Title
+
+✂️ FSW-BARBER
+
+## Description
+
+🚀It is a web system made in mobile-first format through the Full Stack Week Bootcamp with Felipe Rocha, for scheduling appointments in barbershops
+
+##
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+<h1 align="center">
+  <img width="200px" height="350px" src=".github/Initial.png" alt="SignIn">
+  <img width="200px" height="350px"src=".github/Agendamentos.png" alt="Agendamentos">
+  <img width="200px" height="350px"src=".github/Barbearia.png" alt="Barbearia">
+  <img width="200px" height="350px"src=".github/Servicos.png" alt="Barbearia">
+  <img width="200px" height="350px"src=".github/Login.png">
+  <img width="1000px" height="400px" src=".github/Cancelar.png" alt="SignUp">
+  </h1>
+
+# Table of Contents
+
+<p align="center">
+  <a href="#recycle-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-features">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+ 
+</p>
+
+## 🚀 Technologies
+
+**Language:**
+
+**🛠 Language / Main Framework**
+
+TypeScript
+– Superset of JavaScript with static typing
+
+Next.js
+– React framework for web applications
+
+**💾 Database / ORM**
+
+PostgreSQL
+– Relational database management system
+
+Prisma
+– ORM for databases
+
+**🔑 Authentication**
+
+NextAuth.js
+– Authentication for Next.js
+
+**📋 Forms / Validation**
+
+React Hook Form
+– Form controller
+
+Zod
+– Data validation and parsing
+
+**🎨 Styling**
+
+Tailwind CSS
+– Utility-first CSS framework
+
+**📅 Dates**
+
+date-fns
+– Date utility library
+
+## 🔗 Features
+
+View list of appointments
+
+Make a reservation
+
+Cancel a reservation
+
+View confirmed and completed reservations
+
+Sign in with Google account via NextAuth.js
 
 ## Getting Started
 
